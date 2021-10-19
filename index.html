@@ -1,0 +1,369 @@
+<html>
+	<head>
+		<meta charset="UTF-8">
+
+		<title>
+			Inteligência Artificial
+		</title>
+		<script>
+			var x1 = 0;
+			var x2 = 0;
+			var x3 = 0;
+			var x4 = 0;
+			var b1 = 1;
+
+			var w11 = 0;
+			var w21 = 0;
+			var w31 = 0;
+			var w41 = 0;
+			var wb1 = 0;
+			
+			var valordesejado = 0; 
+			var erro = 0;
+			var taxadeaprendizagem = 1;
+
+			var y = 0;
+
+			function f(y){
+				if(y > 0){
+					return 1;
+				} else {
+					return 0;
+				}
+			}
+			function calculoeajuste(){
+
+				y = (w11 * x1) + (w21 * x2) + (w31 * x3) + (w41 * x4) + (wb1 * b1);
+				y = f(y);
+
+				erro = valordesejado - y;
+
+				if(erro != 0){
+					//correção de erro alterando os pesos
+					w11 = w11 + (taxadeaprendizagem * erro * x1);
+					w21 = w21 + (taxadeaprendizagem * erro * x2);
+					w31 = w31 + (taxadeaprendizagem * erro * x3);
+					w41 = w41 + (taxadeaprendizagem * erro * x4);
+					wb1 = wb1 + (taxadeaprendizagem * erro * b1);
+	
+					return false;
+				} else {
+					return true;
+				}
+
+			}
+			function calculoeresposta(){
+				y = (w11 * x1) + (w21 * x2) + (w31 * x3) + (w41 * x4) + (wb1 * b1);
+				return f(y);
+			}
+			function resposta(){
+				return ("x1="+x1+";x2="+x2+";x3="+x3+";x4="+x4+";y="+calculoeresposta()+"<br>");
+			}
+			function getRandomIntInclusive(min, max) {
+				min = Math.ceil(min);
+				max = Math.floor(max);
+				return Math.floor(Math.random() * (max - min + 1)) + min;
+			}
+			function teste(){
+				let respostaCerta = true;
+			
+				if( !calculoeajuste() ){
+					respostaCerta = false;
+				}
+				
+				console.log("peso entrada 1: " + w11);
+				console.log("peso entrada 2: " + w21);
+				console.log("peso entrada 3: " + w31);
+				console.log("peso entrada 4: " + w41);
+				console.log("peso entrada bias 1: " + wb1);
+				console.log(respostaCerta?"Resposta Certa!":"Resposta Errada!");
+
+				return respostaCerta;
+			}
+		</script>
+	</head>
+	<body>
+		<p id="respostaFinal"></p>
+		<script>
+			/*
+			x1 = 1;
+			x2 = 0;
+			alert(calculoeresposta());
+			*/
+
+			let i = 0;
+			let pronto = false;
+			
+			//for(let i = 0; i < 15; i++){
+			while(!pronto){	
+				pronto = true;
+				
+				i++;
+				//taxadeaprendizagem = getRandomIntInclusive(1, 10);
+		
+				x1 = 1;
+				x2 = 1;
+				x3 = 1;
+				x4 = 1;
+				valordesejado = 0;
+
+				if(!teste()){
+					pronto = false;
+				}
+	
+				x1 = 1;
+				x2 = 1;
+				x3 = 1;
+				x4 = 0;
+				valordesejado = 0;
+
+				if(!teste()){
+					pronto = false;
+				}
+
+				x1 = 1;
+				x2 = 1;
+				x3 = 0;
+				x4 = 1;
+				valordesejado = 0;
+
+				if(!teste()){
+					pronto = false;
+				}
+
+				x1 = 1;
+				x2 = 1;
+				x3 = 0;
+				x4 = 0;
+				valordesejado = 0;
+
+				if(!teste()){
+					pronto = false;
+				}
+
+				x1 = 1;
+				x2 = 0;
+				x3 = 1;
+				x4 = 1;
+				valordesejado = 0;
+
+				if(!teste()){
+					pronto = false;
+				}
+
+				x1 = 1;
+				x2 = 0;
+				x3 = 1;
+				x4 = 0;
+				valordesejado = 0;
+
+				if(!teste()){
+					pronto = false;
+				}
+
+				x1 = 1;
+				x2 = 0;
+				x3 = 0;
+				x4 = 1;
+				valordesejado = 0;
+
+				if(!teste()){
+					pronto = false;
+				}
+
+				x1 = 1;
+				x2 = 0;
+				x3 = 0;
+				x4 = 0;
+				valordesejado = 0;
+
+				if(!teste()){
+					pronto = false;
+				}
+
+				x1 = 0;
+				x2 = 1;
+				x3 = 1;
+				x4 = 1;
+				valordesejado = 1;
+
+				if(!teste()){
+					pronto = false;
+				}
+
+				x1 = 0;
+				x2 = 1;
+				x3 = 1;
+				x4 = 0;
+				valordesejado = 1;
+
+				if(!teste()){
+					pronto = false;
+				}
+
+				x1 = 0;
+				x2 = 1;
+				x3 = 0;
+				x4 = 1;
+				valordesejado = 1;
+
+				if(!teste()){
+					pronto = false;
+				}
+
+				x1 = 0;
+				x2 = 1;
+				x3 = 0;
+				x4 = 0;
+				valordesejado = 1;
+
+				if(!teste()){
+					pronto = false;
+				}
+
+				x1 = 0;
+				x2 = 0;
+				x3 = 1;
+				x4 = 1;
+				valordesejado = 1;
+
+				if(!teste()){
+					pronto = false;
+				}
+
+				x1 = 0;
+				x2 = 0;
+				x3 = 1;
+				x4 = 0;
+				valordesejado = 1;
+
+				if(!teste()){
+					pronto = false;
+				}
+
+				x1 = 0;
+				x2 = 0;
+				x3 = 0;
+				x4 = 1;
+				valordesejado = 1;
+
+				if(!teste()){
+					pronto = false;
+				}
+
+				x1 = 0;
+				x2 = 0;
+				x3 = 0;
+				x4 = 0;
+				valordesejado = 1;
+
+				if(!teste()){
+					pronto = false;
+				}
+
+				console.log(pronto?"Treinamento concluído!":"Treinamento não concluído!");
+				console.log("Taxa de aprendizagem: " + taxadeaprendizagem);
+				console.log("Fim de um ciclo: " + i);
+				console.log("##############################");
+			}
+			//}
+
+			x1 = 1;
+			x2 = 1;
+			x3 = 1;
+			x4 = 1;
+			document.getElementById('respostaFinal').innerHTML += resposta();
+
+			x1 = 1;
+			x2 = 1;
+			x3 = 1;
+			x4 = 0;
+			document.getElementById('respostaFinal').innerHTML += resposta();
+
+			x1 = 1;
+			x2 = 1;
+			x3 = 0;
+			x4 = 1;
+			document.getElementById('respostaFinal').innerHTML += resposta();
+
+			x1 = 1;
+			x2 = 1;
+			x3 = 0;
+			x4 = 0;
+			document.getElementById('respostaFinal').innerHTML += resposta();
+
+			x1 = 1;
+			x2 = 0;
+			x3 = 1;
+			x4 = 1;
+			document.getElementById('respostaFinal').innerHTML += resposta();
+
+			x1 = 1;
+			x2 = 0;
+			x3 = 1;
+			x4 = 0;
+			document.getElementById('respostaFinal').innerHTML += resposta();
+
+			x1 = 1;
+			x2 = 0;
+			x3 = 0;
+			x4 = 1;
+			document.getElementById('respostaFinal').innerHTML += resposta();
+
+			x1 = 1;
+			x2 = 0;
+			x3 = 0;
+			x4 = 0;
+			document.getElementById('respostaFinal').innerHTML += resposta();
+
+			x1 = 0;
+			x2 = 1;
+			x3 = 1;
+			x4 = 1;
+			document.getElementById('respostaFinal').innerHTML += resposta();
+
+			x1 = 0;
+			x2 = 1;
+			x3 = 1;
+			x4 = 0;
+			document.getElementById('respostaFinal').innerHTML += resposta();
+
+			x1 = 0;
+			x2 = 1;
+			x3 = 0;
+			x4 = 1;
+			document.getElementById('respostaFinal').innerHTML += resposta();
+
+			x1 = 0;
+			x2 = 1;
+			x3 = 0;
+			x4 = 0;
+			document.getElementById('respostaFinal').innerHTML += resposta();
+
+			x1 = 0;
+			x2 = 0;
+			x3 = 1;
+			x4 = 1;
+			document.getElementById('respostaFinal').innerHTML += resposta();
+
+			x1 = 0;
+			x2 = 0;
+			x3 = 1;
+			x4 = 0;
+			document.getElementById('respostaFinal').innerHTML += resposta();
+
+			x1 = 0;
+			x2 = 0;
+			x3 = 0;
+			x4 = 1;
+			document.getElementById('respostaFinal').innerHTML += resposta();
+
+			x1 = 0;
+			x2 = 0;
+			x3 = 0;
+			x4 = 0;
+			document.getElementById('respostaFinal').innerHTML += resposta();
+						
+		</script>
+	</body>
+</html>
